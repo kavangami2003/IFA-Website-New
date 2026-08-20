@@ -81,7 +81,7 @@ export default function GuidesPage() {
         <div className="container-page">
           <Reveal>
             <h2 className="mx-auto max-w-3xl font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-[3.5rem]">Ready to speak to a real person?</h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/70">When you're ready, we'll introduce you to a hand-picked, FCA-regulated independent adviser — usually within the hour. Free, with no obligation.</p>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/70">When you&apos;re ready, we&apos;ll introduce you to a hand-picked, FCA-regulated independent adviser — usually within the hour. Free, with no obligation.</p>
             <Link href="/find-a-financial-adviser/" className="mt-10 inline-flex items-center gap-2 rounded-full bg-stone px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-champagne-deep">
               Find my adviser <ArrowRight className="h-4 w-4" />
             </Link>

@@ -61,10 +61,9 @@
   }
 }
 
-/* Fonts wired to next/font variables (set in layout.tsx) */
 @theme inline {
-  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Avenir Next", "Segoe UI", sans-serif;
+  --font-sans: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 @layer base {
