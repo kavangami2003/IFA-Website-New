@@ -44,7 +44,7 @@ export default function GuidesPage() {
             <Reveal key={g.t} delay={(i % 3) * 0.08}>
               <Link href={g.href} className="group block overflow-hidden rounded-[28px] border border-line transition-transform hover:-translate-y-1">
                 <div className="relative h-56 w-full overflow-hidden">
-                  <Image src={g.img} alt={g.t} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <Image priority={i === 0} src={g.img} alt={g.t} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <div className="p-8">
                   <h3 className="text-2xl font-bold text-ink">{g.t}</h3>
