@@ -1,0 +1,166 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "lenis/dist/lenis.css";
+
+/* ==================================================================
+   IFA CONNECT — Design System
+   Palette: "Charcoal & Warm Stone" (Brand Guidelines v1)
+   charcoal #17171a · charcoal-deep #101012 · charcoal-card #2a2a2e
+   stone #c3ad8e (accent + CTA) · stone-dark #8a7355 · stone-tint #efe7db
+   bone #f3efe7 (canvas) · ink #26262b · line #e6ded1
+   Type: Plus Jakarta Sans (display) · Inter (body)
+   ================================================================== */
+
+@theme {
+  /* --- palette "Editorial — Ink, Teal & Cream" (Stitch design) ---
+     'charcoal' tokens repurposed as TEAL so any dark band = teal section;
+     'stone' tokens = teal accent. */
+  --color-charcoal: #087f83;       /* teal — coloured band surface */
+  --color-charcoal-deep: #066b6e;  /* deep teal — footer/hover */
+  --color-charcoal-card: #0a8f94;  /* teal raised card */
+
+  --color-stone: #087f83;          /* teal — accent */
+  --color-stone-dark: #066b6e;     /* deeper teal for text/hover */
+  --color-stone-tint: #e8f3f3;     /* soft teal panel */
+  --color-champagne-deep: #055557; /* --cta hover (teal) */
+
+  --color-bone: #ffffff;           /* white canvas */
+  --color-cream: #f6f4ee;          /* warm cream band */
+  --color-paleblue: #e7ecf8;       /* pale blue band */
+  --color-line: #e5e5e5;
+  --color-line-soft: #eeeeee;
+
+  --color-ink: #1a1a1a;            /* near-black ink for headings/text */
+  --color-body: #666666;          /* muted body text */
+  --color-faint: #9a9a9a;
+  --color-on-charcoal: #d6eeee;    /* body text on teal */
+  --color-muted-charcoal: #a9d0d1; /* muted text on teal */
+
+  --color-sage-tint: #e8f3f3;      /* alias kept */
+  --color-tp-green: #00b67a;       /* Trustpilot star only */
+
+  /* --- system --- */
+  --radius: 6px;
+  --shadow-soft: 0 6px 24px rgba(0, 0, 0, 0.32);
+  --shadow-lift: 0 14px 36px rgba(0, 0, 0, 0.44);
+
+  /* --- the signature SIKA weighted "settle" ease --- */
+  --ease-weighted: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- ambient keyframes (shared house motion) --- */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-slow-zoom: slow-zoom 14s ease-out forwards;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes slow-zoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+}
+
+/* Fonts wired to next/font variables (set in layout.tsx) */
+@theme inline {
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    line-height: 1.12;
+    color: var(--color-ink);
+  }
+  ::selection {
+    background: var(--color-stone);
+    color: var(--color-charcoal);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-stone-dark);
+  }
+  .container-page {
+    width: 100%;
+    max-width: 95rem; /* 1520px editorial width */
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-page { padding-inline: 3rem; }
+  }
+  @media (min-width: 640px) {
+    .container-page { padding-inline: 1.5rem; }
+  }
+}
+
+/* ==================================================================
+   EDITORIAL LAYER v2 — grain, oversized type, motion utilities
+   (same Charcoal & Warm Stone palette, richer execution)
+   ================================================================== */
+
+@layer base {
+  /* Film-grain overlay across the whole site (subtle, non-interactive) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  /* Editorial display sizes — refined, not oversized */
+  .display-1 { font-size: clamp(1.85rem, 3.4vw, 2.9rem); line-height: 1.06; letter-spacing: -0.022em; font-weight: 800; }
+  .display-2 { font-size: clamp(1.45rem, 2.3vw, 2rem); line-height: 1.14; letter-spacing: -0.018em; font-weight: 800; }
+  .display-3 { font-size: clamp(1.05rem, 1.3vw, 1.25rem); line-height: 1.24; letter-spacing: -0.01em; font-weight: 700; }
+
+  /* Section index label, e.g. "(01) — Independent advice" */
+  .index-label { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* Faint numeral marker (restrained) */
+  .numeral { font-family: var(--font-display); font-weight: 800; line-height: 0.85; font-size: clamp(1.75rem, 2.6vw, 2.4rem); }
+
+  /* Champagne underline behind a word */
+  .u-accent { box-shadow: inset 0 -0.14em 0 0 var(--color-stone); }
+  .u-accent-thick { box-shadow: inset 0 -0.42em 0 0 color-mix(in srgb, var(--color-stone) 55%, transparent); }
+
+  .hairline { border-top: 1px solid var(--color-line); }
+  .hairline-dark { border-top: 1px solid rgba(255,255,255,0.12); }
+
+  /* Card lift on hover */
+  .lift { transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), border-color 0.3s; }
+  .lift:hover { transform: translateY(-4px); }
+}
+
+/* Always-emitted marquee keyframes (plain CSS so Tailwind can't tree-shake it) */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee-x var(--marquee-speed, 34s) linear infinite; will-change: transform; }
+.marquee-track:hover { animation-play-state: paused; }
