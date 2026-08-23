@@ -12,10 +12,10 @@ const data: ServiceData = {
   hero: {
     title: "Pensions: Make every pot work harder.",
     intro: "Old workplace pensions, SIPPs and forgotten pots — brought together and optimised. We match you with an independent, FCA-regulated adviser who makes your pensions simple to understand and easy to control.",
-    primary: "Review my pensions",
+    primary: "Sort out my pensions",
     secondary: "Explore Options",
     image: "/social-proof.jpg",
-    alt: "A client reviewing pensions with an adviser",
+    alt: "A client discussing pensions with an adviser",
   },
   grid: {
     title: "Pension Solutions",
@@ -62,8 +62,8 @@ const data: ServiceData = {
   cta: {
     title: "Ready to take control of your pensions?",
     body: "Take the first step towards pensions that are consolidated, low-cost and working towards your retirement.",
-    button: "Review my pensions",
-    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We do not provide financial advice, and there is no charge to you. Transferring or consolidating pensions is not right for everyone and you could lose valuable guarantees — always take regulated advice first. The value of investments can fall as well as rise.",
+    button: "Find a pension adviser",
+    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We are not FCA-regulated and do not provide financial advice ourselves, and there is no charge to you. Transferring or consolidating pensions is not right for everyone and you could lose valuable guarantees — always take regulated advice first. The value of investments can fall as well as rise.",
   },
 };
 

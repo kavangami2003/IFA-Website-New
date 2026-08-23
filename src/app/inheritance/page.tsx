@@ -63,7 +63,7 @@ const data: ServiceData = {
     title: "Ready to protect your family's future?",
     body: "Take the first step towards an estate plan that honours your wishes and reduces the tax your family pays.",
     button: "Protect my estate",
-    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We do not provide financial, tax or legal advice, and there is no charge to you. Inheritance tax and estate planning involve tax and legal considerations; some trust and estate services may not be regulated by the FCA. Tax treatment depends on your individual circumstances and may change.",
+    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We are not FCA-regulated and do not provide financial, tax or legal advice ourselves, and there is no charge to you. Inheritance tax and estate planning involve tax and legal considerations; some trust and estate services may not be regulated by the FCA. Tax treatment depends on your individual circumstances and may change.",
   },
 };
 

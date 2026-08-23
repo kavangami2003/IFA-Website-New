@@ -63,7 +63,7 @@ const data: ServiceData = {
     title: "Ready to elevate your financial strategy?",
     body: "Take the first step towards a structured, professional approach to your wealth management.",
     button: "Connect with a wealth manager",
-    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We do not provide financial advice, and there is no charge to you. The value of investments can fall as well as rise and you may get back less than you invest.",
+    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We are not FCA-regulated and do not provide financial advice ourselves, and there is no charge to you. The value of investments can fall as well as rise and you may get back less than you invest.",
   },
 };
 

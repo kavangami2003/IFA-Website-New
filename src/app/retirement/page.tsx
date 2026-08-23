@@ -63,7 +63,7 @@ const data: ServiceData = {
     title: "Ready to plan the retirement you've earned?",
     body: "Take the first step towards a clear, secure and tax-efficient retirement income.",
     button: "Plan my retirement",
-    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We do not provide financial advice, and there is no charge to you. The value of investments and any income from them can fall as well as rise. Tax treatment depends on your individual circumstances and may change.",
+    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We are not FCA-regulated and do not provide financial advice ourselves, and there is no charge to you. The value of investments and any income from them can fall as well as rise. Tax treatment depends on your individual circumstances and may change.",
   },
 };
 

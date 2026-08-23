@@ -37,7 +37,7 @@ const data: ServiceData = {
   steps: {
     title: "How Switching Works",
     items: [
-      { n: "01", t: "Free review", d: "Tell us about your current setup. We'll help you see clearly what you're paying and what you're getting." },
+      { n: "01", t: "Tell us your situation", d: "Share what isn't working and what you're looking for. It takes a couple of minutes, with no pressure and no obligation." },
       { n: "02", t: "We match you", d: "We introduce you to an independent, FCA-regulated adviser suited to your goals, location and portfolio." },
       { n: "03", t: "Your adviser handles the move", d: "Once you're happy, your new adviser manages the transfers and paperwork, checking nothing valuable is lost." },
     ],
@@ -63,7 +63,7 @@ const data: ServiceData = {
     title: "Ready for an adviser who works for you?",
     body: "Take the first step towards clearer advice, fairer fees and a professional who actually keeps in touch.",
     button: "Find a better adviser",
-    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We do not provide financial advice, and there is no charge to you. Switching or transferring investments and pensions is not right for everyone and may involve costs or the loss of valuable guarantees — always take regulated advice first. The value of investments can fall as well as rise.",
+    compliance: "IFA Connect introduces you to FCA-regulated independent financial advisers. We are not FCA-regulated and do not provide financial advice ourselves, and there is no charge to you. Switching or transferring investments and pensions is not right for everyone and may involve costs or the loss of valuable guarantees — always take regulated advice first. The value of investments can fall as well as rise.",
   },
 };
 
