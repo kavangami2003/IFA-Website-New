@@ -17,6 +17,11 @@ const data: ServiceData = {
     image: "/hq-hero.jpg",
     alt: "A client meeting a new adviser",
   },
+  pain: {
+    title: "Staying put is easy. That is usually why people do it.",
+    body:
+      "The fees are hard to compare, the annual review keeps slipping, and moving sounds like paperwork. So a relationship that stopped working years ago carries on quietly costing you. Changing adviser is far more straightforward than most people assume — and finding out what else is available costs nothing.",
+  },
   grid: {
     title: "Why People Switch",
     intro: "You're never locked in to an adviser. These are the reasons people most often come to us looking for something better.",
@@ -59,6 +64,14 @@ const data: ServiceData = {
     image: "/retirement-adviser.jpg",
     alt: "An independent financial adviser",
   },
+  faqs: [
+    { q: "Is this free — what's the catch?", a: "There is no charge to you at any point. Advisers pay us to be introduced to people looking for advice, which is how the service is funded. It does not change the fees your adviser charges you, and you are under no obligation to proceed after the first conversation." },
+    { q: "Will my adviser be genuinely independent?", a: "Yes. We only work with independent, whole-of-market, FCA-regulated advisers. A restricted adviser can only recommend from a limited product range; we never introduce one." },
+    { q: "I already have an adviser — is it worth a second opinion?", a: "Plenty of people come to us for exactly that. There is no obligation to move, and an introductory conversation with an independent adviser is a straightforward way to sense-check what you already have." },
+    { q: "Is switching adviser complicated?", a: "Less than people expect. Your new adviser handles the transfer paperwork with your existing provider. Nothing moves until you have agreed to it, and there is no obligation to switch after an introductory conversation." },
+    { q: "How do I know if I am paying too much?", a: "Charges are often spread across platform fees, fund fees and the adviser's own fee, which makes the total hard to see. An independent adviser can set out what you are paying in one place, so you can compare it properly." },
+    { q: "What happens after I enquire?", a: "A member of our team calls you, usually within the hour in office hours, to understand your situation. We then introduce you to one hand-picked independent adviser for a free, no-obligation conversation." },
+  ],
   cta: {
     title: "Ready for an adviser who works for you?",
     body: "Take the first step towards clearer advice, fairer fees and a professional who actually keeps in touch.",

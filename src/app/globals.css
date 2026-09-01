@@ -99,17 +99,27 @@
     text-transform: uppercase;
     color: var(--color-stone-dark);
   }
+
+  /* Page gutter. Breakpoints ascend so the widest match wins — the previous order
+     put the 640px rule *after* the 768px one, so desktop never got its larger
+     gutter. 1.125rem keeps a 320px screen readable without feeling cramped. */
   .container-page {
     width: 100%;
     max-width: 95rem; /* 1520px editorial width */
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: 1.125rem;
   }
-  @media (min-width: 768px) {
-    .container-page { padding-inline: 3rem; }
+  @media (min-width: 400px) {
+    .container-page { padding-inline: 1.25rem; }
   }
   @media (min-width: 640px) {
-    .container-page { padding-inline: 1.5rem; }
+    .container-page { padding-inline: 1.75rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-page { padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1280px) {
+    .container-page { padding-inline: 3rem; }
   }
 }
 
@@ -163,3 +173,326 @@
 }
 .marquee-track { animation: marquee-x var(--marquee-speed, 34s) linear infinite; will-change: transform; }
 .marquee-track:hover { animation-play-state: paused; }
+
+/* Trustpilot review strip — continuous looping marquee */
+@keyframes tp-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.tp-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+.tp-track {
+  display: flex;
+  width: max-content;
+  animation: tp-scroll 70s linear infinite;
+  will-change: transform;
+}
+.tp-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .tp-track { animation: none; }
+}
+
+/* ==================================================================
+   MOBILE LAYER — hardened down to 320px
+   Everything below is small-screen correction: nothing here changes the
+   desktop composition, it only stops it collapsing on narrow viewports.
+   ================================================================== */
+
+@layer base {
+  html {
+    /* Anchor targets (#details, #pricing…) must clear the sticky header. */
+    scroll-padding-top: 92px;
+    /* Stop iOS Safari inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    /* Belt-and-braces against a stray wide child causing a sideways scroll. */
+    min-width: 320px;
+  }
+
+  /* Long unbroken strings (emails, £ figures, URLs) must never push the page
+     wider than the viewport on a 320px screen. */
+  h1, h2, h3, h4, h5, p, li, a, button, label, blockquote, figcaption, span {
+    overflow-wrap: break-word;
+  }
+
+  img, video, svg, iframe {
+    max-width: 100%;
+  }
+
+  /* Grid/flex children default to min-width:auto, which lets wide content
+     (marquees, long headings) blow out the track. */
+  main :where(section) > * {
+    min-width: 0;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    a, button, [role="button"], input, select, textarea {
+      touch-action: manipulation;
+    }
+  }
+}
+
+@layer utilities {
+  /* The signature arch/blob crop. Fixed at 240px it swallowed a 320px screen —
+     the radius was nearly the full width of the image. Now it scales. */
+  .organic-shape {
+    border-radius:
+      clamp(88px, 30vw, 240px)
+      clamp(88px, 30vw, 240px)
+      clamp(20px, 5vw, 40px)
+      clamp(88px, 30vw, 240px);
+  }
+
+  /* Softer variant for the smaller inline crops. */
+  .organic-shape-sm {
+    border-radius: clamp(20px, 6vw, 40px);
+  }
+
+  /* Type that must stay legible at 320px: the base step is deliberately small,
+     and only grows once there is room. These carry a txt- prefix so they cannot
+     be misread as Tailwind height or top utilities. */
+  .txt-hero {
+    font-size: clamp(1.875rem, 8.5vw, 5.25rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+  .txt-section {
+    font-size: clamp(1.625rem, 5.4vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    font-weight: 700;
+  }
+  .txt-statement {
+    font-size: clamp(1.75rem, 5.8vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .txt-card {
+    font-size: clamp(1.25rem, 4.4vw, 1.75rem);
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+    font-weight: 700;
+  }
+  .txt-lead {
+    font-size: clamp(1rem, 3.4vw, 1.375rem);
+    line-height: 1.6;
+  }
+  .txt-body {
+    font-size: clamp(0.9375rem, 3vw, 1.0625rem);
+    line-height: 1.65;
+  }
+
+  /* Full-width stacked CTAs on phones, inline from 400px up. */
+  .cta-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .cta-stack > * {
+    width: 100%;
+    justify-content: center;
+  }
+  @media (min-width: 400px) {
+    .cta-stack { flex-direction: row; flex-wrap: wrap; width: auto; }
+    .cta-stack > * { width: auto; }
+  }
+}
+
+@media (max-width: 640px) {
+  /* The mask eats 5% either side; on a 320px screen that is most of the first
+     card. Narrow it, and slow the rails so they stay readable. */
+  .tp-marquee {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
+  }
+  .tp-track { animation-duration: 90s; }
+  .marquee-track { animation-duration: 44s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track, .tp-track { animation: none; }
+}
+
+/* ==================================================================
+   TRUSTPILOT STRIP — white review cards on the cream band, scrolling
+   horizontally in one continuous rail. Sits directly under the hero.
+   ================================================================== */
+
+.tp-strip {
+  position: relative;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-cream);
+  padding-block: 1.5rem;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .tp-strip { padding-block: 2rem; }
+}
+
+/* "Excellent · 4.6 out of 5 · Trustpilot" — the official micro widget. */
+.tp-head-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  margin-bottom: 1.25rem;
+  width: 100%;
+  max-width: 300px;
+  padding-inline: 1.125rem;
+}
+@media (min-width: 768px) {
+  .tp-head-widget { max-width: 340px; margin-bottom: 1.5rem; }
+}
+
+/* Reserve the widget height so hydration does not shift the rail down, and
+   give the pre-hydration fallback link something legible to be. */
+.tp-head-widget .trustpilot-widget {
+  width: 100%;
+  min-height: 24px;
+}
+.tp-fallback {
+  display: block;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-stone-dark);
+  text-decoration: none;
+}
+
+/* Equal-height cards on one rail. .tp-track carries the loop animation. */
+.tp-strip .tp-track {
+  align-items: stretch;
+  gap: 0.75rem;
+  padding-inline: 0.75rem;
+}
+@media (min-width: 768px) {
+  .tp-strip .tp-track { gap: 1.25rem; padding-inline: 1rem; }
+}
+
+.tp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  flex: 0 0 auto;
+  /* Narrow enough that a 320px screen still shows the edge of the next card. */
+  width: clamp(15.5rem, 78vw, 21.5rem);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+@media (min-width: 768px) {
+  .tp-card { padding: 1.35rem 1.5rem; }
+}
+
+.tp-card .stars {
+  flex: 0 0 auto;
+  font-size: 0.8125rem;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  color: var(--color-tp-green);
+}
+
+.tp-card .quote {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-ink);
+}
+@media (min-width: 768px) {
+  .tp-card .quote { font-size: 1rem; }
+}
+
+.tp-card .name {
+  font-weight: 600;
+  color: var(--color-stone-dark);
+  white-space: nowrap;
+}
+
+/* ==================================================================
+   PROSE — long-form content (guides, about, legal). Mobile-first.
+   ================================================================== */
+
+.prose-ifa {
+  max-width: 46rem;
+  color: var(--color-body);
+  font-size: clamp(0.9375rem, 3vw, 1.0625rem);
+  line-height: 1.7;
+}
+.prose-ifa > * + * { margin-top: 1.15em; }
+
+.prose-ifa h2 {
+  margin-top: 2.25em;
+  font-size: clamp(1.35rem, 4.6vw, 1.875rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.prose-ifa h3 {
+  margin-top: 1.9em;
+  font-size: clamp(1.0625rem, 3.6vw, 1.25rem);
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.prose-ifa h2 + p,
+.prose-ifa h3 + p { margin-top: 0.7em; }
+
+.prose-ifa strong { color: var(--color-ink); font-weight: 600; }
+
+.prose-ifa a {
+  color: var(--color-stone-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-ifa ul, .prose-ifa ol { padding-left: 1.15rem; }
+.prose-ifa li + li { margin-top: 0.5em; }
+.prose-ifa ul { list-style: disc; }
+.prose-ifa ol { list-style: decimal; }
+.prose-ifa li::marker { color: var(--color-stone); }
+
+.prose-ifa blockquote {
+  border-left: 3px solid var(--color-stone);
+  padding-left: 1rem;
+  color: var(--color-ink);
+  font-style: italic;
+}
+
+/* Tables must scroll rather than widen the page on a 320px screen. */
+.prose-ifa .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+}
+.prose-ifa table {
+  width: 100%;
+  min-width: 22rem;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.prose-ifa th, .prose-ifa td {
+  padding: 0.7rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+.prose-ifa th {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.prose-ifa tbody tr:last-child td { border-bottom: 0; }

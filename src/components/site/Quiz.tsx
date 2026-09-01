@@ -3,7 +3,8 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { Lock, Check, ShieldCheck, Phone } from "lucide-react";
+import { Lock, Check, ShieldCheck, Phone, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -43,9 +44,13 @@ const ASSET_BANDS = [
 const ADVISER = ["No, this is my first", "Yes, but I want a second opinion", "Yes, but I'm looking to switch"];
 const URGENCY = ["As soon as possible", "This week", "Just researching for now"];
 
+const FIELD =
+  "w-full rounded-2xl border border-line bg-white px-4 py-3.5 text-[16px] text-ink placeholder:text-faint focus:border-stone focus:outline-none focus:ring-2 focus:ring-stone/40 sm:px-5";
+
 const TrustLine = () => (
-  <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-faint">
-    <Lock className="h-3.5 w-3.5 text-stone" /> Secure <span aria-hidden>·</span> No obligation <span aria-hidden>·</span> Independent advisers only
+  <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] leading-tight text-faint sm:text-xs">
+    <Lock className="h-3.5 w-3.5 shrink-0 text-stone" /> Secure <span aria-hidden>·</span> No obligation{" "}
+    <span aria-hidden>·</span> Independent advisers only
   </div>
 );
 
@@ -109,9 +114,10 @@ export function Quiz() {
     <div className="mx-auto max-w-xl">
       {/* Progress */}
       {!isThankYou && (
-        <div className="mb-6">
-          <div className="mb-2 flex items-center justify-between text-xs text-faint">
-            <span>Question {step + 1} of {total}</span><span>{pct}%</span>
+        <div className="mb-5 sm:mb-6">
+          <div className="mb-2 flex items-center justify-between gap-2 text-[11px] text-faint sm:text-xs">
+            <span>Question {step + 1} of {total}</span>
+            <span>{pct}%</span>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-line">
             <motion.div className="h-full rounded-full bg-stone" animate={{ width: `${pct}%` }} transition={{ duration: 0.5, ease: EASE }} />
@@ -130,17 +136,17 @@ export function Quiz() {
           {/* SINGLE-SELECT SCREENS */}
           {"options" in current && current.options && (
             <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">{current.headline}</h2>
-              {"sub" in current && current.sub && <p className="mt-2 text-sm text-body">{current.sub}</p>}
-              <div className="mt-6 space-y-3">
+              <h2 className="font-display text-[1.35rem] font-extrabold leading-tight tracking-tight text-ink sm:text-2xl">{current.headline}</h2>
+              {"sub" in current && current.sub && <p className="mt-2 text-[13px] leading-relaxed text-body sm:text-sm">{current.sub}</p>}
+              <div className="mt-5 space-y-2.5 sm:mt-6 sm:space-y-3">
                 {current.options.map((opt, i) => (
                   <button
                     key={opt}
                     onClick={() => choose(current.id, ("values" in current && current.values ? current.values[i] : opt) as string)}
-                    className="flex w-full items-center justify-between rounded-2xl border border-line bg-white px-5 py-4 text-left text-[15px] font-semibold text-ink transition-colors hover:border-stone hover:bg-stone-tint"
+                    className="flex w-full min-h-[56px] items-center justify-between gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 text-left text-[14px] font-semibold leading-snug text-ink transition-colors hover:border-stone hover:bg-stone-tint active:bg-stone-tint sm:px-5 sm:py-4 sm:text-[15px]"
                   >
-                    {opt}
-                    <span className="h-3 w-6 rounded-[9px] border-2 border-stone" />
+                    <span className="min-w-0">{opt}</span>
+                    <span className="h-3 w-6 shrink-0 rounded-[9px] border-2 border-stone" />
                   </button>
                 ))}
               </div>
@@ -150,44 +156,64 @@ export function Quiz() {
           {/* POSTCODE */}
           {current.kind === "postcode" && (
             <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">{current.headline}</h2>
-              <p className="mt-2 text-sm text-body">{current.sub}</p>
+              <h2 className="font-display text-[1.35rem] font-extrabold leading-tight tracking-tight text-ink sm:text-2xl">{current.headline}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-body sm:text-sm">{current.sub}</p>
               <input
                 autoFocus
                 value={answers.postcode ?? ""}
                 onChange={(e) => setAnswers((a) => ({ ...a, postcode: e.target.value.toUpperCase() }))}
                 placeholder="e.g. S1 or LE11"
-                className="mt-6 w-full rounded-2xl border border-line bg-white px-5 py-4 text-[15px] font-semibold text-ink placeholder:text-faint focus:border-stone focus:outline-none focus:ring-2 focus:ring-stone/40"
+                autoComplete="postal-code"
+                className={cn(FIELD, "mt-5 font-semibold sm:mt-6")}
               />
-              <button onClick={next} disabled={!answers.postcode} className="mt-4 w-full rounded-full bg-ink px-6 py-4 font-display font-bold text-white transition-colors hover:bg-charcoal-deep disabled:opacity-40">Continue</button>
+              <button
+                onClick={next}
+                disabled={!answers.postcode}
+                className="mt-4 min-h-[54px] w-full rounded-full bg-ink px-6 font-display text-[15px] font-bold text-white transition-colors hover:bg-charcoal-deep disabled:opacity-40 sm:text-base"
+              >
+                Continue
+              </button>
             </div>
           )}
 
           {/* CONTACT */}
           {current.kind === "contact" && (
             <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">{current.headline}</h2>
-              <p className="mt-2 text-sm text-body">A real member of our team will call you, usually within the hour (office hours). No obligation, and your details are only ever shared with the one adviser we match you to.</p>
-              <div className="mt-6 space-y-3">
-                <input value={contact.first_name} onChange={(e) => setContact({ ...contact, first_name: e.target.value })} placeholder="First name" className="w-full rounded-2xl border border-line bg-white px-5 py-3.5 text-[15px] text-ink placeholder:text-faint focus:border-stone focus:outline-none focus:ring-2 focus:ring-stone/40" />
-                <input value={contact.phone} onChange={(e) => setContact({ ...contact, phone: e.target.value })} type="tel" inputMode="tel" placeholder="Phone (we'll call you)" className="w-full rounded-2xl border border-line bg-white px-5 py-3.5 text-[15px] text-ink placeholder:text-faint focus:border-stone focus:outline-none focus:ring-2 focus:ring-stone/40" />
-                <input value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} type="email" placeholder="Email" className="w-full rounded-2xl border border-line bg-white px-5 py-3.5 text-[15px] text-ink placeholder:text-faint focus:border-stone focus:outline-none focus:ring-2 focus:ring-stone/40" />
-                <input value={contact.best_time} onChange={(e) => setContact({ ...contact, best_time: e.target.value })} placeholder="Best time to call (optional)" className="w-full rounded-2xl border border-line bg-white px-5 py-3.5 text-[15px] text-ink placeholder:text-faint focus:border-stone focus:outline-none focus:ring-2 focus:ring-stone/40" />
+              <h2 className="font-display text-[1.35rem] font-extrabold leading-tight tracking-tight text-ink sm:text-2xl">{current.headline}</h2>
+              <p className="mt-2 text-[13px] leading-relaxed text-body sm:text-sm">
+                A real member of our team will call you, usually within the hour (office hours). No obligation, and your details are only ever shared with the one adviser we match you to.
+              </p>
+              <div className="mt-5 space-y-2.5 sm:mt-6 sm:space-y-3">
+                <input value={contact.first_name} onChange={(e) => setContact({ ...contact, first_name: e.target.value })} placeholder="First name" autoComplete="given-name" className={FIELD} />
+                <input value={contact.phone} onChange={(e) => setContact({ ...contact, phone: e.target.value })} type="tel" inputMode="tel" autoComplete="tel" placeholder="Phone (we'll call you)" className={FIELD} />
+                <input value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} type="email" inputMode="email" autoComplete="email" placeholder="Email" className={FIELD} />
+                <input value={contact.best_time} onChange={(e) => setContact({ ...contact, best_time: e.target.value })} placeholder="Best time to call (optional)" className={FIELD} />
               </div>
 
-              <label className="mt-5 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-body">
-                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4 accent-stone" />
-                I&apos;m happy for IFA Connect to use these details to match me with a suitable independent financial adviser.
+              <label className="mt-5 flex cursor-pointer items-start gap-3 text-[12px] leading-relaxed text-body sm:text-xs">
+                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-stone" />
+                <span>
+                  I&apos;m happy for IFA Connect to use these details to match me with a suitable independent financial adviser. See our{" "}
+                  <Link href="/privacy-policy/" className="underline hover:text-ink">Privacy Policy</Link>.
+                </span>
               </label>
 
-              <div className="mt-4 space-y-2 rounded-2xl bg-cream p-4 text-xs text-body">
-                <p className="flex items-center gap-2"><Lock className="h-3.5 w-3.5 text-stone" /> Your information is secure and only shared with your matched adviser.</p>
-                <p className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-stone" /> We only work with FCA-regulated, independent advisers.</p>
-                <p className="flex items-center gap-2"><Check className="h-3.5 w-3.5 text-stone" /> Free, with no obligation to proceed.</p>
+              <div className="mt-4 space-y-2 rounded-2xl bg-cream p-4 text-[12px] leading-relaxed text-body sm:text-xs">
+                <p className="flex items-start gap-2"><Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-stone" /> Your information is secure and only shared with your matched adviser.</p>
+                <p className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-stone" /> We only work with FCA-regulated, independent advisers.</p>
+                <p className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-stone" /> Free, with no obligation to proceed.</p>
               </div>
 
-              <button onClick={submit} disabled={!contact.first_name || !contact.phone || !consent} className="mt-5 w-full rounded-full bg-ink px-6 py-4 font-display font-bold text-white transition-colors hover:bg-charcoal-deep disabled:opacity-40">Get matched with an adviser</button>
-              <p className="mt-3 text-center text-[11px] text-faint">IFA Connect introduces you to FCA-regulated independent advisers. We don&apos;t give advice ourselves and there&apos;s no charge to you.</p>
+              <button
+                onClick={submit}
+                disabled={!contact.first_name || !contact.phone || !consent}
+                className="mt-5 min-h-[54px] w-full rounded-full bg-ink px-6 font-display text-[15px] font-bold text-white transition-colors hover:bg-charcoal-deep disabled:opacity-40 sm:text-base"
+              >
+                Get matched with an adviser
+              </button>
+              <p className="mt-3 text-center text-[11px] leading-relaxed text-faint">
+                IFA Connect introduces you to FCA-regulated independent advisers. We don&apos;t give advice ourselves and there&apos;s no charge to you.
+              </p>
             </div>
           )}
 
@@ -195,21 +221,37 @@ export function Quiz() {
           {current.kind === "thankyou" && (
             <div className="text-center">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-stone"><ShieldCheck className="h-7 w-7 text-white" /></div>
-              <h2 className="mt-5 font-display text-2xl font-extrabold tracking-tight text-ink">You&apos;re all set — a real person will call you shortly.</h2>
-              <p className="mt-3 text-sm text-body">One of our team will call you{contact.phone ? ` on ${contact.phone}` : ""}, usually within the hour during office hours, to understand what you need and introduce you to the right independent adviser. There&apos;s no obligation.</p>
-              <div className="mx-auto mt-6 max-w-sm space-y-2 text-left text-sm text-body">
-                <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-stone" /> We call you</p>
-                <p className="flex items-center gap-2"><Check className="h-4 w-4 text-stone" /> We match you to an independent adviser</p>
-                <p className="flex items-center gap-2"><Check className="h-4 w-4 text-stone" /> Free first conversation, no obligation</p>
+              <h2 className="mt-5 font-display text-[1.35rem] font-extrabold leading-tight tracking-tight text-ink sm:text-2xl">
+                You&apos;re all set — a real person will call you shortly.
+              </h2>
+              <p className="mt-3 text-[14px] leading-relaxed text-body sm:text-sm">
+                One of our team will call you{contact.phone ? ` on ${contact.phone}` : ""}, usually within the hour during office hours, to understand what you need and introduce you to the right independent adviser. There&apos;s no obligation.
+              </p>
+              <div className="mx-auto mt-6 max-w-sm space-y-2 text-left text-[14px] text-body sm:text-sm">
+                <p className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-stone" /> We call you</p>
+                <p className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-stone" /> We match you to an independent adviser</p>
+                <p className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-stone" /> Free first conversation, no obligation</p>
               </div>
+              <Link
+                href="/guides/how-much-do-i-need-to-retire/"
+                className="mt-7 inline-flex min-h-[48px] items-center gap-2 rounded-full border border-line px-6 text-[14px] font-semibold text-ink transition-colors hover:border-stone hover:text-stone"
+              >
+                While you wait: how much do I need to retire? <ArrowRight className="h-4 w-4 shrink-0" />
+              </Link>
             </div>
           )}
         </motion.div>
       </AnimatePresence>
 
       {!isThankYou && (
-        <div className="mt-6 flex items-center justify-between">
-          <button onClick={back} disabled={step === 0} className={cn("text-sm text-body transition-colors hover:text-ink", step === 0 && "invisible")}>← Back</button>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <button
+            onClick={back}
+            disabled={step === 0}
+            className={cn("self-start text-sm text-body transition-colors hover:text-ink", step === 0 && "invisible")}
+          >
+            ← Back
+          </button>
           <TrustLine />
         </div>
       )}

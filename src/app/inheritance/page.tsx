@@ -17,6 +17,11 @@ const data: ServiceData = {
     image: "/home-hero-1.jpg",
     alt: "A family enjoying time together",
   },
+  pain: {
+    title: "Most families only find out what it costs once it is too late to plan.",
+    body:
+      "Inheritance tax is one of the few bills you can meaningfully change the size of — but almost entirely in advance. Gifting, trusts, allowances and the rules on pensions all take time to put in place. Leaving it means your family inherits the decision as well as the estate.",
+  },
   grid: {
     title: "Estate Solutions",
     intro: "Independent advisers structure your estate so that your wishes are honoured and your family keeps as much of your wealth as the rules allow.",
@@ -59,6 +64,14 @@ const data: ServiceData = {
     image: "/pillar-human.jpg",
     alt: "An independent estate planning adviser",
   },
+  faqs: [
+    { q: "Is this free — what's the catch?", a: "There is no charge to you at any point. Advisers pay us to be introduced to people looking for advice, which is how the service is funded. It does not change the fees your adviser charges you, and you are under no obligation to proceed after the first conversation." },
+    { q: "Will my adviser be genuinely independent?", a: "Yes. We only work with independent, whole-of-market, FCA-regulated advisers. A restricted adviser can only recommend from a limited product range; we never introduce one." },
+    { q: "What is changing for pensions and inheritance tax in 2027?", a: "From 6 April 2027, most unused pension funds are expected to be counted as part of the estate for inheritance tax. Whether that affects you depends entirely on your circumstances, the allowances available to you and the size of the estate — which is why it is worth a conversation rather than a rule of thumb." },
+    { q: "Is my estate large enough to need planning?", a: "Property values mean a lot of estates sit closer to the threshold than people expect, particularly once pensions are counted. An adviser can tell you where you stand before you decide whether to do anything about it." },
+    { q: "Will the adviser be local to me?", a: "We match on area wherever we can, and we ask for your postcode for that reason. Many advisers also work by phone and video, so you are not limited to your immediate area if the right specialist is further afield." },
+    { q: "What happens after I enquire?", a: "A member of our team calls you, usually within the hour in office hours, to understand your situation. We then introduce you to one hand-picked independent adviser for a free, no-obligation conversation." },
+  ],
   cta: {
     title: "Ready to protect your family's future?",
     body: "Take the first step towards an estate plan that honours your wishes and reduces the tax your family pays.",

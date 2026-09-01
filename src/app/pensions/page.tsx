@@ -17,6 +17,11 @@ const data: ServiceData = {
     image: "/social-proof.jpg",
     alt: "A client discussing pensions with an adviser",
   },
+  pain: {
+    title: "Most people lose track of their pensions long before they need them.",
+    body:
+      "A few jobs in, and the pots are scattered across providers you no longer recognise, on charges you have never compared, invested in funds you did not choose. It is nobody's fault — the system makes it easy to lose sight of. An independent adviser can bring the whole picture together so you can see what you actually have, and what it is costing you.",
+  },
   grid: {
     title: "Pension Solutions",
     intro: "Whether you have one pension or ten, an independent adviser helps you see the whole picture and make sure every pound is invested with purpose.",
@@ -59,6 +64,14 @@ const data: ServiceData = {
     image: "/adviser-portrait.jpg",
     alt: "An independent pension adviser",
   },
+  faqs: [
+    { q: "Is this free — what's the catch?", a: "There is no charge to you at any point. Advisers pay us to be introduced to people looking for advice, which is how the service is funded. It does not change the fees your adviser charges you, and you are under no obligation to proceed after the first conversation." },
+    { q: "Will my adviser be genuinely independent?", a: "Yes. We only work with independent, whole-of-market, FCA-regulated advisers. A restricted adviser can only recommend from a limited product range; we never introduce one." },
+    { q: "Should I combine my pensions into one?", a: "Sometimes, and sometimes not — it depends on the charges, the funds and any guarantees attached to the older pots, some of which are valuable and would be lost on transfer. That is precisely the assessment an independent adviser does before recommending anything." },
+    { q: "What if I have lost track of an old pension?", a: "That is common, and traceable. An adviser can help you locate old workplace schemes and pull the details together so nothing is left behind." },
+    { q: "Do I have to share my account details?", a: "No. We only ever ask for a rough asset band, never account numbers, and we never ask you to move or transfer money. Your details are shared with the one adviser we match you to, and no one else." },
+    { q: "What happens after I enquire?", a: "A member of our team calls you, usually within the hour in office hours, to understand your situation. We then introduce you to one hand-picked independent adviser for a free, no-obligation conversation." },
+  ],
   cta: {
     title: "Ready to take control of your pensions?",
     body: "Take the first step towards pensions that are consolidated, low-cost and working towards your retirement.",

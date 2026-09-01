@@ -17,6 +17,11 @@ const data: ServiceData = {
     image: "/retirement-hero.jpg",
     alt: "A couple enjoying a relaxed retirement",
   },
+  pain: {
+    title: "Retirement is the one financial decision you cannot redo.",
+    body:
+      "Get it wrong and you either run out of money too soon, or live smaller than you needed to. Pensions, tax, drawdown, the State Pension, how much is genuinely enough — it is a lot to get right once, with no second attempt. The right independent adviser turns that guesswork into a plan built around your numbers.",
+  },
   grid: {
     title: "Retirement Solutions",
     intro: "Independent advisers shape your pensions and savings into a dependable income, matched to your timeline, your tax position and how much certainty you want.",
@@ -59,6 +64,14 @@ const data: ServiceData = {
     image: "/retirement-adviser.jpg",
     alt: "An independent retirement adviser",
   },
+  faqs: [
+    { q: "Is this free — what's the catch?", a: "There is no charge to you at any point. Advisers pay us to be introduced to people looking for advice, which is how the service is funded. It does not change the fees your adviser charges you, and you are under no obligation to proceed after the first conversation." },
+    { q: "Will my adviser be genuinely independent?", a: "Yes. We only work with independent, whole-of-market, FCA-regulated advisers. A restricted adviser can only recommend from a limited product range; we never introduce one." },
+    { q: "I already have an adviser — is it worth a second opinion?", a: "Plenty of people come to us for exactly that. There is no obligation to move, and an introductory conversation with an independent adviser is a straightforward way to sense-check what you already have." },
+    { q: "How much do I need to retire?", a: "It depends far more on your spending than on a headline figure. The honest answer is that it is worth working through your own numbers rather than a rule of thumb — our guide walks through how that calculation is usually approached." },
+    { q: "Will the adviser be local to me?", a: "We match on area wherever we can, and we ask for your postcode for that reason. Many advisers also work by phone and video, so you are not limited to your immediate area if the right specialist is further afield." },
+    { q: "What happens after I enquire?", a: "A member of our team calls you, usually within the hour in office hours, to understand your situation. We then introduce you to one hand-picked independent adviser for a free, no-obligation conversation." },
+  ],
   cta: {
     title: "Ready to plan the retirement you've earned?",
     body: "Take the first step towards a clear, secure and tax-efficient retirement income.",

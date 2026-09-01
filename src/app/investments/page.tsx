@@ -17,6 +17,11 @@ const data: ServiceData = {
     image: "/adviser-portrait.jpg",
     alt: "A wealth manager at their desk",
   },
+  pain: {
+    title: "Money sitting still is still making a decision.",
+    body:
+      "Too much in cash, a portfolio built for a life you have since outgrown, or a mix you inherited from an adviser you no longer speak to — the common thread is drift. Nothing feels urgent, so nothing changes. An independent adviser starts from what you actually need the money to do, and works back from there.",
+  },
   grid: {
     title: "Investment Strategies",
     intro: "Our network of IFAs offer sophisticated approaches to market participation, designed to align with your personal values, risk tolerance, and long-term objectives.",
@@ -59,6 +64,14 @@ const data: ServiceData = {
     image: "/retirement-adviser.jpg",
     alt: "An independent financial adviser",
   },
+  faqs: [
+    { q: "Is this free — what's the catch?", a: "There is no charge to you at any point. Advisers pay us to be introduced to people looking for advice, which is how the service is funded. It does not change the fees your adviser charges you, and you are under no obligation to proceed after the first conversation." },
+    { q: "Will my adviser be genuinely independent?", a: "Yes. We only work with independent, whole-of-market, FCA-regulated advisers. A restricted adviser can only recommend from a limited product range; we never introduce one." },
+    { q: "I already have an adviser — is it worth a second opinion?", a: "Plenty of people come to us for exactly that. There is no obligation to move, and an introductory conversation with an independent adviser is a straightforward way to sense-check what you already have." },
+    { q: "Is my portfolio suitable if my circumstances have changed?", a: "Suitability is not fixed — retirement, a sale, an inheritance or a change in health can all move it. An independent adviser reassesses risk, time horizon and tax position against where you are now, not where you were when the portfolio was built." },
+    { q: "Do I have to share my account details?", a: "No. We only ever ask for a rough asset band, never account numbers, and we never ask you to move or transfer money. Your details are shared with the one adviser we match you to, and no one else." },
+    { q: "What happens after I enquire?", a: "A member of our team calls you, usually within the hour in office hours, to understand your situation. We then introduce you to one hand-picked independent adviser for a free, no-obligation conversation." },
+  ],
   cta: {
     title: "Ready to elevate your financial strategy?",
     body: "Take the first step towards a structured, professional approach to your wealth management.",
